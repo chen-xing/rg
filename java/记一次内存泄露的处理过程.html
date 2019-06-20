@@ -1,0 +1,601 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>记一次内存泄露的排查过程 · 人工资料库</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../linux/linux常用知识点.html" />
+    
+    
+    <link rel="prev" href="如何解决http请求返回结果中文乱码.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">db</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">java</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="SpringMVC启动过程详解.html">
+            
+                <a href="SpringMVC启动过程详解.html">
+            
+                    
+                    SpringMVC启动过程详解.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="hibernate.html">
+            
+                <a href="hibernate.html">
+            
+                    
+                    Hibernate使用总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="idea debug技巧.html">
+            
+                <a href="idea debug技巧.html">
+            
+                    
+                    ideat debug技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="idea快捷键.html">
+            
+                <a href="idea快捷键.html">
+            
+                    
+                    IntelliJ IDEA使用技巧一览表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="javamelody监控.html">
+            
+                <a href="javamelody监控.html">
+            
+                    
+                    引入maven依赖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="java中的int与byte的转化.html">
+            
+                <a href="java中的int与byte的转化.html">
+            
+                    
+                    java中的int与byte的转化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="java知识点.html">
+            
+                <a href="java知识点.html">
+            
+                    
+                    1.使用maven构建多模块工程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="springboot中实现多数据源.html">
+            
+                <a href="springboot中实现多数据源.html">
+            
+                    
+                    springboot中实现多数据源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="如何实现跨浏览器共享cookies.html">
+            
+                <a href="如何实现跨浏览器共享cookies.html">
+            
+                    
+                    如何实现跨浏览器共享cookies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="如何解决http请求返回结果中文乱码.html">
+            
+                <a href="如何解决http请求返回结果中文乱码.html">
+            
+                    
+                    如何解决http请求返回结果中文乱码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.11" data-path="记一次内存泄露的处理过程.html">
+            
+                <a href="记一次内存泄露的处理过程.html">
+            
+                    
+                    记一次内存泄露的排查过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">linux</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../linux/linux常用知识点.html">
+            
+                <a href="../linux/linux常用知识点.html">
+            
+                    
+                    linux常用知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../linux/从0到1打造自己专属内网穿透工具.html">
+            
+                <a href="../linux/从0到1打造自己专属内网穿透工具.html">
+            
+                    
+                    从0到1打造自己专属内网穿透工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">net</li>
+        
+        
+    
+
+    
+        
+        <li class="header">工具</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../工具/分享一款不错的typora主体.html">
+            
+                <a href="../工具/分享一款不错的typora主体.html">
+            
+                    
+                    分享一款不错的typora主体
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">架构</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../架构/数据库表结构自动修复和表数据同步原理分析.html">
+            
+                <a href="../架构/数据库表结构自动修复和表数据同步原理分析.html">
+            
+                    
+                    大家是否有这样的体验:
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >记一次内存泄露的排查过程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x8BB0;&#x4E00;&#x6B21;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#x7684;&#x6392;&#x67E5;&#x8FC7;&#x7A0B;">&#x8BB0;&#x4E00;&#x6B21;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#x7684;&#x6392;&#x67E5;&#x8FC7;&#x7A0B;</h2>
+<h3 id="1&#x3001;&#x73B0;&#x8C61;&#x5206;&#x6790;">1&#x3001;&#x73B0;&#x8C61;&#x5206;&#x6790;</h3>
+<blockquote>
+<p>&#x65B0;&#x4EA7;&#x54C1;&#x4E0A;&#x7EBF;&#x540E;&#xFF0C;&#x6D41;&#x91CF;&#x5BFC;&#x5165;&#x8FC7;&#x6765;&#xFF0C;&#x670D;&#x52A1;&#x7684;&#x5185;&#x5B58;&#x6301;&#x7EED;&#x5347;&#x9AD8;&#xFF0C;&#x4E14;&#x6709;&#x589E;&#x65E0;&#x51CF;&#x3002;&#x968F;&#x7740;&#x6D41;&#x91CF;&#x7684;&#x5347;&#x9AD8;&#xFF0C;&#x5185;&#x5B58;&#x589E;&#x52A0;&#x7684;&#x901F;&#x5EA6;&#x4E5F;&#x662F;&#x7EBF;&#x6027;&#x589E;&#x6DA8;&#x3002;</p>
+</blockquote>
+<h3 id="2&#x3001;&#x51C6;&#x5907;&#x77E5;&#x8BC6;">2&#x3001;&#x51C6;&#x5907;&#x77E5;&#x8BC6;</h3>
+<h4 id="21&#x3001;java-memory&#x7ED3;&#x6784;">2.1&#x3001;java memory&#x7ED3;&#x6784;</h4>
+<h5 id="211&#x3001;&#x5206;&#x4EE3;&#x6982;&#x5FF5;">2.1.1&#x3001;&#x5206;&#x4EE3;&#x6982;&#x5FF5;</h5>
+<blockquote>
+<p>&#x5BF9;&#x4E8E;&#x5783;&#x573E;&#x6536;&#x96C6;&#x7B97;&#x6CD5;&#x6765;&#x8BF4;&#xFF0C;&#x5206;&#x4EE3;&#x56DE;&#x6536;&#x662F;&#x9AD8;&#x7EA7;&#x7B97;&#x6CD5;&#x4E4B;&#x4E00;&#x3002;&#x5BF9;&#x8C61;&#x6309;&#x7167;&#x751F;&#x6210;&#x65F6;&#x95F4;&#x8FDB;&#x884C;&#x5206;&#x4EE3;&#xFF0C;&#x521A;&#x521A;&#x751F;&#x6210;&#x4E0D;&#x4E45;&#x7684;&#x5E74;&#x8F7B;&#x5BF9;&#x8C61;&#x5212;&#x4E3A;&#x65B0;&#x751F;&#x4EE3;&#xFF08;Young 
+gen-eration&#xFF09;&#xFF0C;&#x800C;&#x5B58;&#x6D3B;&#x4E86;&#x8F83;&#x957F;&#x65F6;&#x95F4;&#x7684;&#x5BF9;&#x8C61;&#x5212;&#x4E3A;&#x8001;&#x751F;&#x4EE3;&#xFF08;Old 
+generation&#xFF09;&#x3002;&#x6839;&#x636E;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x53EF;&#x80FD;&#x8FD8;&#x4F1A;&#x5212;&#x5206;&#x66F4;&#x591A;&#x7684;&#x4EE3;&#x3002;&#x6BD4;&#x5982;&#x6709;&#x7684;&#x628A;&#x6C38;&#x4E45;&#x4EE3;&#x4E5F;&#x7B97;&#x505A;&#x4E00;&#x4E2A;&#x4EE3;&#x3002;</p>
+</blockquote>
+<h5 id="212&#x3001;memory&#x5212;&#x5206;">2.1.2&#x3001;memory&#x5212;&#x5206;</h5>
+<blockquote>
+<p>java memory&#x4E3B;&#x8981;&#x5206;heap memory &#x548C; non-heap memory&#xFF0C;&#x5176;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+</blockquote>
+<p>&#x200B;                     </p>
+<pre><code>Max memory = [-Xmx] + [-XX:MaxPermSize] + number_of_threads * [-Xss]
+</code></pre><h5 id="213&#x3001;heap&#x7ED3;&#x6784;">2.1.3&#x3001;heap&#x7ED3;&#x6784;</h5>
+<blockquote>
+<p>&#x6309;&#x5206;&#x4EE3;&#xFF0C;&#x5206;young-eden,young-survivor,old
+&#x7528;-Xmn,-Xms,-Xmx&#x6765;&#x6307;&#x5B9A;</p>
+</blockquote>
+<h5 id="214&#x3001;non-heap&#x7ED3;&#x6784;">2.1.4&#x3001;non-heap&#x7ED3;&#x6784;</h5>
+<blockquote>
+<p>&#x5305;&#x62EC;metaspace,thread stacks,compiled native code,memory allocated by native code</p>
+<p>-XX:PermSize&#x6216;-XX:MetaspceSize,-Xss&#x6216;-XX:ThreadStackSize</p>
+</blockquote>
+<h4 id="22-&#x3001;permgen&#x4E0E;metaspace">2.2 &#x3001;PermGen&#x4E0E;Metaspace</h4>
+<h5 id="221&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x7684;&#x53D8;&#x5316;">2.2.1&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x7684;&#x53D8;&#x5316;</h5>
+<ul>
+<li>&#x5728;java7&#x7684;&#x65F6;&#x5019;&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x5219;&#x79FB;&#x5230;java heap</li>
+</ul>
+<blockquote>
+<p>&#x6240;&#x6709;&#x7684;&#x88AB;intern&#x7684;String&#x88AB;&#x5B58;&#x50A8;&#x5728;PermGen&#x533A;.PermGen&#x533A;&#x4F7F;&#x7528;-XX:MaxPermSize=N&#x6765;&#x8BBE;&#x7F6E;&#x6700;&#x5927;&#x5927;&#x5C0F;&#xFF0C;&#x4F46;&#x662F;&#x7531;&#x4E8E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;string.intern&#x901A;&#x5E38;&#x662F;&#x4E0D;&#x53EF;&#x9884;&#x6D4B;&#x548C;&#x4E0D;&#x53EF;&#x63A7;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x597D;&#x8BBE;&#x7F6E;&#x8FD9;&#x4E2A;&#x5927;&#x5C0F;&#x3002;&#x8BBE;&#x7F6E;&#x4E0D;&#x597D;&#x7684;&#x8BDD;&#xFF0C;&#x5E38;&#x5E38;&#x4F1A;&#x5F15;&#x8D77;</p>
+</blockquote>
+<pre><code>java.lang.OutOfMemoryError: PermGen space
+</code></pre><ul>
+<li>java7&#xFF0C;8&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x5728;&#x5806;&#x4E2D;&#x5B9E;&#x73B0;</li>
+</ul>
+<blockquote>
+<p>&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x88AB;&#x9650;&#x5236;&#x5728;&#x6574;&#x4E2A;&#x5E94;&#x7528;&#x7684;&#x5806;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x8C03;&#x7528;String.intern()&#x589E;&#x52A0;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x4E0D;&#x4F1A;&#x4F7F;&#x6C38;&#x4E45;&#x4EE3;OOM&#x4E86;&#x3002;</p>
+</blockquote>
+<h5 id="222&#x3001;&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x53D8;&#x5316;">2.2.2&#x3001;&#x65B9;&#x6CD5;&#x533A;&#x7684;&#x53D8;&#x5316;</h5>
+<ul>
+<li>java8&#x7684;&#x65F6;&#x5019;&#x53BB;&#x9664;PermGen&#xFF0C;&#x5C06;&#x5176;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x533A;&#x79FB;&#x5230;non-heap&#x4E2D;&#x7684;Metaspace</li>
+<li>Metaspace&#x5C5E;&#x4E8E;non-heap</li>
+<li>OOM&#x5F02;&#x5E38;</li>
+</ul>
+<pre><code>&#x5982;&#x679C;&#x7C7B;&#x5143;&#x6570;&#x636E;&#x7684;&#x7A7A;&#x95F4;&#x5360;&#x7528;&#x8FBE;&#x5230;MaxMetaspaceSize&#x8BBE;&#x7F6E;&#x7684;&#x503C;&#xFF0C;&#x5C06;&#x4F1A;&#x89E6;&#x53D1;&#x5BF9;&#x8C61;&#x548C;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#x7684;&#x5783;&#x573E;&#x56DE;&#x6536;&#x3002;
+java.lang.OutOfMemoryError: Metaspace space
+JVM&#x4ECE;Metaspace&#x5728;&#x6355;&#x83B7;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;&#x5185;&#x5B58;&#x5206;&#x914D;&#x5931;&#x8D25;&#x540E;&#x629B;&#x51FA;&#x3002;
+</code></pre><h4 id="23&#x3001;metaspace&#x76F8;&#x5173;&#x53C2;&#x6570;">2.3&#x3001;Metaspace&#x76F8;&#x5173;&#x53C2;&#x6570;</h4>
+<ul>
+<li>-XX:MetaspaceSize&#xFF0C;&#x521D;&#x59CB;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;&#xFF0C;&#x8FBE;&#x5230;&#x8BE5;&#x503C;&#x5C31;&#x4F1A;&#x89E6;&#x53D1;&#x5783;&#x573E;&#x6536;&#x96C6;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x5378;&#x8F7D;&#xFF0C;&#x540C;&#x65F6;GC&#x4F1A;&#x5BF9;&#x8BE5;&#x503C;&#x8FDB;&#x884C;&#x8C03;&#x6574;&#xFF1A;&#x5982;&#x679C;&#x91CA;&#x653E;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x5C31;&#x9002;&#x5F53;&#x964D;&#x4F4E;&#x8BE5;&#x503C;&#xFF1B;&#x5982;&#x679C;&#x91CA;&#x653E;&#x4E86;&#x5F88;&#x5C11;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x4E0D;&#x8D85;&#x8FC7;MaxMetaspaceSize&#x65F6;&#xFF0C;&#x9002;&#x5F53;&#x63D0;&#x9AD8;&#x8BE5;&#x503C;&#x3002;</li>
+<li>-XX:MaxMetaspaceSize&#xFF0C;&#x6700;&#x5927;&#x7A7A;&#x95F4;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;&#x6CA1;&#x6709;&#x9650;&#x5236;&#x7684;&#x3002;</li>
+<li>-XX:MinMetaspaceFreeRatio&#xFF0C;&#x5728;GC&#x4E4B;&#x540E;&#xFF0C;&#x6700;&#x5C0F;&#x7684;Metaspace&#x5269;&#x4F59;&#x7A7A;&#x95F4;&#x5BB9;&#x91CF;&#x7684;&#x767E;&#x5206;&#x6BD4;&#xFF0C;&#x51CF;&#x5C11;&#x4E3A;&#x5206;&#x914D;&#x7A7A;&#x95F4;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x5783;&#x573E;&#x6536;&#x96C6;</li>
+<li>-XX:MaxMetaspaceFreeRatio&#xFF0C;&#x5728;GC&#x4E4B;&#x540E;&#xFF0C;&#x6700;&#x5927;&#x7684;Metaspace&#x5269;&#x4F59;&#x7A7A;&#x95F4;&#x5BB9;&#x91CF;&#x7684;&#x767E;&#x5206;&#x6BD4;&#xFF0C;&#x51CF;&#x5C11;&#x4E3A;&#x91CA;&#x653E;&#x7A7A;&#x95F4;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x5783;&#x573E;&#x6536;&#x96C6;</li>
+</ul>
+<h4 id="24-&#x3001;&#x5C0F;&#x7ED3;">2.4 &#x3001;&#x5C0F;&#x7ED3;</h4>
+<p>&#x5C06;&#x5E38;&#x91CF;&#x6C60;&#x4ECE;PermGen&#x5265;&#x79BB;&#x5230;heap&#x4E2D;&#xFF0C;&#x5C06;&#x5143;&#x6570;&#x636E;&#x4ECE;PermGen&#x5265;&#x79BB;&#x5230;&#x5143;&#x6570;&#x636E;&#x533A;&#xFF0C;&#x53BB;&#x9664;PermGen&#x7684;&#x597D;&#x5904;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x6C60;&#x4ECE;PermGen&#x5206;&#x79BB;&#x51FA;&#x6765;&#xFF0C;&#x4E0E;&#x7C7B;&#x5143;&#x6570;&#x636E;&#x5206;&#x5F00;&#xFF0C;&#x63D0;&#x5347;&#x7C7B;&#x5143;&#x6570;&#x636E;&#x7684;&#x72EC;&#x7ACB;&#x6027;</li>
+<li>&#x5C06;&#x5143;&#x6570;&#x636E;&#x4ECE;PermGen&#x5265;&#x79BB;&#x51FA;&#x6765;&#x5230;Metaspace&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x5347;&#x5BF9;&#x5143;&#x6570;&#x636E;&#x7684;&#x7BA1;&#x7406;&#x540C;&#x65F6;&#x63D0;&#x5347;GC&#x6548;&#x7387;&#x3002;</li>
+</ul>
+<blockquote>
+<p>&#x5728;PermGen&#x4E2D;&#x5143;&#x6570;&#x636E;&#x53EF;&#x80FD;&#x4F1A;&#x968F;&#x7740;&#x6BCF;&#x4E00;&#x6B21;Full GC&#x53D1;&#x751F;&#x800C;&#x8FDB;&#x884C;&#x79FB;&#x52A8;&#x3002;HotSpot&#x865A;&#x62DF;&#x673A;&#x7684;&#x6BCF;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;&#x90FD;&#x9700;&#x8981;&#x7279;&#x6B8A;&#x5904;&#x7406;PermGen&#x4E2D;&#x7684;&#x5143;&#x6570;&#x636E;&#xFF0C;&#x5206;&#x79BB;&#x51FA;&#x6765;&#x4EE5;&#x540E;&#x53EF;&#x4EE5;&#x7B80;&#x5316;Full GC&#x4EE5;&#x53CA;&#x5BF9;&#x4EE5;&#x540E;&#x7684;&#x5E76;&#x53D1;&#x9694;&#x79BB;&#x7C7B;&#x5143;&#x6570;&#x636E;&#x7B49;&#x65B9;&#x9762;&#x8FDB;&#x884C;&#x4F18;&#x5316;&#x3002;</p>
+</blockquote>
+<ul>
+<li>&#x4E3A;&#x540E;&#x7EED;&#x5C06;HotSpot&#x4E0E;JRockit&#x5408;&#x4E8C;&#x4E3A;&#x4E00;&#x505A;&#x51C6;&#x5907;&#x3002;</li>
+</ul>
+<blockquote>
+<p>PermGen&#x662F;HotSpot&#x7684;&#x5B9E;&#x73B0;&#x7279;&#x6709;&#x7684;&#xFF0C;JRockit&#x5E76;&#x6CA1;&#x6709;PermGen&#x4E00;&#x8BF4;</p>
+</blockquote>
+<h3 id="3&#x3001;&#x5DE5;&#x5177;&#x51C6;&#x5907;">3&#x3001;&#x5DE5;&#x5177;&#x51C6;&#x5907;</h3>
+<ul>
+<li>jvisualvm.exe</li>
+<li>javamelody</li>
+<li>druid</li>
+<li>arthas</li>
+<li>jmeter</li>
+</ul>
+<h3 id="4&#x3001;&#x521D;&#x6B65;&#x5206;&#x6790;">4&#x3001;&#x521D;&#x6B65;&#x5206;&#x6790;</h3>
+<blockquote>
+<p>2.1&#x3001;&#x5185;&#x5B58;&#x6CC4;&#x9732;</p>
+<p>  &#x901A;&#x8FC7;javamelody&#x5206;&#x6790;&#x53D1;&#x73B0;&#x5806;&#x5185;&#x5B58;&#x5E76;&#x672A;&#x51FA;&#x73B0;&#x5927;&#x7684;&#x6CC4;&#x9732;&#x95EE;&#x9898;</p>
+</blockquote>
+<h3 id="5&#x3001;&#x6000;&#x7591;&#x6392;&#x67E5;">5&#x3001;&#x6000;&#x7591;&#x6392;&#x67E5;</h3>
+<blockquote>
+<p>3.1&#x3001;druid&#x8FDE;&#x63A5;&#x6C60;&#x7684;&#x95EE;&#x9898;</p>
+<p>&#x200B;    &#x7B2C;&#x4E00;&#x3001;&#x672C;&#x4EBA;&#x5BF9;druid&#x8FDE;&#x63A5;&#x6C60;&#x505A;&#x4E86;&#x62E6;&#x622A;&#x5904;&#x7406;</p>
+<p>&#x200B;    &#x7B2C;&#x4E8C;&#x3001;druid&#x7684;&#x9ED8;&#x8BA4;&#x76D1;&#x63A7;&#x6570;&#x636E;&#x662F;&#x4FDD;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x4E2D;</p>
+<p>3.2&#x3001;spring-retry&#x6846;&#x67B6;</p>
+<p>   spring-retry&#x4E0E;springboot&#x6574;&#x5408;&#x4E0D;&#x5F53;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x7C7B;&#x91CD;&#x590D;&#x52A0;&#x8F7D;</p>
+<p>3.3&#x3001;orika&#x5BF9;&#x8C61;&#x6620;&#x5C04;</p>
+<p>  &#x591A;&#x4F8B;&#x4F7F;&#x7528;orika&#x7684;mapper&#x5BF9;&#x8C61;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x5806;&#x5916;&#x5185;&#x5B58;&#x6EA2;&#x51FA;</p>
+</blockquote>
+<h3 id="6&#x3001;&#x731C;&#x6D4B;&#x9A8C;&#x8BC1;">6&#x3001;&#x731C;&#x6D4B;&#x9A8C;&#x8BC1;</h3>
+<blockquote>
+<p>4.1&#x3001;&#x672C;&#x5730;junit&#x5355;&#x5143;&#x6D4B;&#x8BD5;</p>
+<p>4.2&#x3001;jmeter&#x538B;&#x529B;&#x6D4B;&#x8BD5;</p>
+<p>4.3&#x3001;arthas&#x5728;&#x7EBF;&#x89C2;&#x5BDF;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x60C5;&#x51B5;</p>
+</blockquote>
+<h3 id="7&#x3001;&#x95EE;&#x9898;&#x6D6E;&#x51FA;&#x6C34;&#x9762;">7&#x3001;&#x95EE;&#x9898;&#x6D6E;&#x51FA;&#x6C34;&#x9762;</h3>
+<blockquote>
+<p><img src="D:\data\dataImages\jvm.jpg" alt="jvm"></p>
+</blockquote>
+<h3 id="8&#x3001;&#x6838;&#x5FC3;&#x95EE;&#x9898;&#x5206;&#x6790;">8&#x3001;&#x6838;&#x5FC3;&#x95EE;&#x9898;&#x5206;&#x6790;</h3>
+<pre><code>orika&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6620;&#x5C04;&#x5DE5;&#x5177;&#x3002;&#x7531;&#x4E8E;&#x8FD9;&#x91CC;&#x6CA1;&#x6709;&#x7528;&#x5355;&#x4F8B;&#x5BFC;&#x81F4;&#x4E86;&#x5185;&#x5B58;&#x7684;&#x6CC4;&#x9732;
+&#x9879;&#x76EE;&#x4E2D;&#x5927;&#x91CF;&#x4F7F;&#x7528;&#x4E86;orika&#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;&#x62F7;&#x8D1D;&#x5DE5;&#x5177;&#xFF0C;&#x4F46;&#x662F;&#x90FD;&#x662F;&#x5728;&#x6BCF;&#x4E2A;serviceImpl&#x4E2D;&#x53BB;&#x6CE8;&#x518C;&#x6620;&#x5C04;&#x65B9;&#x5F0F;&#xFF0C;&#x5176;&#x5B9E;&#x6574;&#x4E2A;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x65B9;&#x5F0F;&#x4E5F;&#x5C31;5&#x4E2A;&#xFF0C;&#x4F46;&#x662F;&#x653E;&#x5230;&#x5B9E;&#x73B0;&#x7C7B;&#x4E2D;&#x5C31;&#x4F1A;&#x91CD;&#x590D;&#x6CE8;&#x518C;&#xFF0C;&#x800C;&#x6BCF;&#x6B21;&#x6CE8;&#x518C;&#x5C31;&#x4F1A;&#x751F;&#x6210;class&#x4FE1;&#x606F;&#xFF0C;&#x5BFC;&#x81F4;Metaspace&#x5360;&#x7528;&#x7A7A;&#x95F4;&#x589E;&#x957F;&#x3002;&#x6700;&#x7EC8;&#x5C31;&#x51FA;&#x73B0;&#x4E86;&#x672C;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x95EE;&#x9898;&#x3002;
+</code></pre><ul>
+<li><p>&#x89E3;&#x51B3;&#x529E;&#x6CD5;</p>
+<pre><code>1&#x3001;&#x96C6;&#x4E2D;&#x5355;&#x4F8B;&#x6CE8;&#x518C;&#x6240;&#x6709;&#x7684;orika&#x7684;&#x6CE8;&#x518C;&#x65B9;&#x5F0F;
+2&#x3001;&#x4F18;&#x5316;jvm&#x53C2;&#x6570;&#x8BBE;&#x7F6E;
+</code></pre></li>
+</ul>
+<h3 id="9&#x3001;&#x540E;&#x7EED;">9&#x3001;&#x540E;&#x7EED;</h3>
+<p>&#x66F4;&#x591A;&#x7CBE;&#x5F69;&#xFF0C;&#x656C;&#x8BF7;&#x5173;&#x6CE8;&#xFF0C; <a href="https://chenzhuofan.top" target="_blank"> &#x7A0B;&#x5E8F;&#x5458;&#x5BFC;&#x822A;&#x7F51;</a>  <a href="https://chenzhuofan.top" target="_blank">https://chenzhuofan.top</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20190410203909209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2N4MzA4Njc5Mjkx,size_16,color_FFFFFF,t_70" width="10px"></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="如何解决http请求返回结果中文乱码.html" class="navigation navigation-prev " aria-label="Previous page: 如何解决http请求返回结果中文乱码">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../linux/linux常用知识点.html" class="navigation navigation-next " aria-label="Next page: linux常用知识">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"记一次内存泄露的排查过程","level":"2.11","depth":1,"next":{"title":"linux常用知识","level":"3.1","depth":1,"path":"linux/linux常用知识点.md","ref":"linux/linux常用知识点.md","articles":[]},"previous":{"title":"如何解决http请求返回结果中文乱码","level":"2.10","depth":1,"path":"java/如何解决http请求返回结果中文乱码.md","ref":"java/如何解决http请求返回结果中文乱码.md","articles":[]},"dir":"ltr"},"config":{"plugins":["summary","toggle-chapters","theme-comscore","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"summary":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"theme-comscore":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"人工资料库","gitbook":"*","theme-default":{"showLevel":true}},"file":{"path":"java/记一次内存泄露的处理过程.md","mtime":"2019-04-15T12:15:43.124Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-20T05:27:14.171Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
